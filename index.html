@@ -4,58 +4,239 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Busy Doin Nothin</title>
+  <title>Busy Doin' Nothin'</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      max-width: 680px;
-      margin: 80px auto;
-      padding: 0 24px;
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-      line-height: 1.6;
-      color: #222;
+      margin: 0;
+      background: #ffffff;
+      color: #222222;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+                   Helvetica, Arial, sans-serif;
     }
 
-    h1 {
-      font-size: 32px;
-      margin-bottom: 8px;
+    .container {
+      width: min(100% - 48px, 1100px);
+      margin: 0 auto;
+      padding: 64px 0 48px;
     }
 
-    h2 {
-      margin-top: 48px;
+    header h1 {
+      margin: 0;
+      font-size: clamp(42px, 5vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      font-weight: 700;
     }
 
-    a {
+    .tagline {
+      margin: 54px 0 0;
+      font-size: clamp(20px, 2.3vw, 30px);
+      line-height: 1.35;
+    }
+
+    main {
+      margin-top: 110px;
+    }
+
+    .app-link {
+      display: block;
       color: inherit;
+      text-decoration: none;
+      border-radius: 24px;
+      margin: -24px;
+      padding: 24px;
+      transition: background-color 0.18s ease;
+    }
+
+    .app {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .app-icon {
+      width: 120px;
+      height: 120px;
+      flex: 0 0 120px;
+      border-radius: 27px;
+      object-fit: cover;
+    }
+
+    .app-info {
+      min-width: 0;
+    }
+
+    .app-name {
+      margin: 0 0 22px;
+      font-size: clamp(34px, 4vw, 48px);
+      line-height: 1;
+      letter-spacing: -0.025em;
+    }
+
+    .app-description {
+      margin: 0;
+      font-size: clamp(18px, 2vw, 26px);
+      line-height: 1.45;
+    }
+
+    .arrow {
+      margin-left: auto;
+      padding-left: 24px;
+      font-size: 28px;
+      opacity: 0;
+      transform: translateX(-6px);
+      transition:
+        opacity 0.18s ease,
+        transform 0.18s ease;
     }
 
     footer {
-      margin-top: 80px;
-      font-size: 14px;
-      color: #777;
+      margin-top: 150px;
+      color: #777777;
+      font-size: 18px;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .app-link:hover {
+        background: #f6f6f6;
+      }
+
+      .app-link:hover .arrow {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .app-link:focus-visible {
+      outline: 2px solid #222;
+      outline-offset: 6px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(100% - 40px, 1100px);
+        padding-top: 40px;
+      }
+
+      header h1 {
+        font-size: 42px;
+      }
+
+      .tagline {
+        margin-top: 32px;
+        font-size: 20px;
+      }
+
+      main {
+        margin-top: 80px;
+      }
+
+      .app-link {
+        margin: -16px;
+        padding: 16px;
+        border-radius: 20px;
+      }
+
+      .app {
+        gap: 20px;
+      }
+
+      .app-icon {
+        width: 82px;
+        height: 82px;
+        flex-basis: 82px;
+        border-radius: 19px;
+      }
+
+      .app-name {
+        margin-bottom: 8px;
+        font-size: 30px;
+      }
+
+      .app-description {
+        font-size: 16px;
+        line-height: 1.4;
+      }
+
+      .arrow {
+        display: none;
+      }
+
+      footer {
+        margin-top: 110px;
+        font-size: 15px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .app {
+        align-items: flex-start;
+      }
+
+      .app-icon {
+        width: 72px;
+        height: 72px;
+        flex-basis: 72px;
+        border-radius: 17px;
+      }
+
+      .app-name {
+        font-size: 27px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <h1>Busy Doin Nothin</h1>
-  <p>Independent software and other things.</p>
+  <div class="container">
 
-  <h2>Elegy</h2>
-  <p>
-    A writing and typesetting app for sharing your words.
-  </p>
+    <header>
+      <h1>Busy Doin' Nothin'</h1>
 
-  <p>
-    <a href="/elegy/support/">Support</a>
-    ·
-    <a href="/elegy/privacy/">Privacy Policy</a>
-  </p>
+      <p class="tagline">
+        Independent software and other things.
+      </p>
+    </header>
 
-  <footer>
-    © 2026 Busy Doin Nothin
-  </footer>
+    <main>
+
+      <a class="app-link" href="/elegy/" aria-label="Learn more about Elegy">
+
+        <div class="app">
+
+          <img
+            class="app-icon"
+            src="/assets/elegy/icon.png"
+            alt="Elegy app icon"
+          >
+
+          <div class="app-info">
+            <h2 class="app-name">Elegy</h2>
+
+            <p class="app-description">
+              A writing and typesetting app for sharing your words.
+            </p>
+          </div>
+
+          <span class="arrow" aria-hidden="true">→</span>
+
+        </div>
+
+      </a>
+
+    </main>
+
+    <footer>
+      © 2026 Busy Doin' Nothin'
+    </footer>
+
+  </div>
 
 </body>
 </html>
