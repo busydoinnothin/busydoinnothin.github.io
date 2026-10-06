@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Elegy — Busy Doin' Nothin'</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: #222;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      line-height: 1.6;
+    }
+
+
+    /* Layout */
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px 40px;
+    }
+
+
+    /* Top bar */
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 56px;
+    }
+
+    .back {
+      color: #777;
+      text-decoration: none;
+      font-size: 14px;
+
+      transition: color .15s ease;
+    }
+
+    .back:hover {
+      color: #222;
+    }
+
+
+    /* Language selector */
+
+    .language {
+      position: relative;
+    }
+
+    .language-button {
+      appearance: none;
+
+      border: 0;
+      background: none;
+
+      padding: 6px 0;
+
+      font: inherit;
+      font-size: 14px;
+
+      color: #777;
+
+      cursor: pointer;
+    }
+
+    .language-button:hover {
+      color: #222;
+    }
+
+    .language-menu {
+      position: absolute;
+
+      top: 36px;
+      right: 0;
+
+      z-index: 20;
+
+      min-width: 130px;
+
+      padding: 6px;
+
+      background: #fff;
+
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+
+      box-shadow:
+        0 6px 24px rgba(0, 0, 0, .08);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transform: translateY(-4px);
+
+      transition:
+        opacity .15s ease,
+        transform .15s ease,
+        visibility .15s;
+    }
+
+    .language-menu.open {
+      opacity: 1;
+      visibility: visible;
+
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: block;
+
+      width: 100%;
+
+      border: 0;
+      background: none;
+
+      padding: 7px 10px;
+
+      border-radius: 6px;
+
+      text-align: left;
+
+      font: inherit;
+      font-size: 14px;
+
+      cursor: pointer;
+    }
+
+    .language-option:hover {
+      background: #f5f5f5;
+    }
+
+
+    /* Hero */
+
+    .hero {
+      display: flex;
+      align-items: center;
+
+      gap: 24px;
+    }
+
+    .app-icon {
+      display: block;
+
+      width: 100px;
+      height: 100px;
+
+      flex: 0 0 100px;
+
+      border-radius: 22px;
+
+      object-fit: cover;
+    }
+
+    .hero h1 {
+      margin: 0 0 5px;
+
+      font-size: 36px;
+      line-height: 1.15;
+    }
+
+    .hero-description {
+      max-width: 520px;
+
+      margin: 0;
+
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+
+    /* Screenshots */
+
+    .screenshots-section {
+      margin-top: 64px;
+    }
+
+    .screenshots {
+      display: flex;
+
+      gap: 18px;
+
+      overflow-x: auto;
+
+      scroll-snap-type: x mandatory;
+
+      overscroll-behavior-x: contain;
+
+      scrollbar-width: none;
+
+      padding: 4px 0 18px;
+    }
+
+    .screenshots::-webkit-scrollbar {
+      display: none;
+    }
+
+    .screenshot {
+      display: block;
+
+      width: 280px;
+      height: auto;
+
+      flex: 0 0 280px;
+
+      border-radius: 12px;
+
+      scroll-snap-align: start;
+    }
+
+
+    /* About */
+
+    .about {
+      max-width: 680px;
+
+      margin-top: 64px;
+    }
+
+    .about h2 {
+      margin: 0 0 16px;
+
+      font-size: 24px;
+      line-height: 1.3;
+    }
+
+    .about p {
+      margin: 0 0 16px;
+
+      font-size: 16px;
+    }
+
+
+    /* Links */
+
+    .links {
+      margin-top: 48px;
+
+      font-size: 15px;
+    }
+
+    .links a {
+      color: #222;
+
+      text-decoration: underline;
+      text-decoration-color: #bbb;
+      text-underline-offset: 3px;
+    }
+
+    .links a:hover {
+      text-decoration-color: #222;
+    }
+
+    .separator {
+      margin: 0 8px;
+
+      color: #aaa;
+    }
+
+
+    /* Footer */
+
+    footer {
+      margin-top: 80px;
+
+      color: #777;
+
+      font-size: 14px;
+    }
+
+
+    /* Mobile */
+
+    @media (max-width: 600px) {
+
+      .container {
+        padding:
+          28px
+          20px
+          36px;
+      }
+
+      .topbar {
+        margin-bottom: 44px;
+      }
+
+      .hero {
+        gap: 18px;
+      }
+
+      .app-icon {
+        width: 82px;
+        height: 82px;
+
+        flex-basis: 82px;
+
+        border-radius: 19px;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .hero-description {
+        font-size: 16px;
+        line-height: 1.4;
+      }
+
+      .screenshots-section {
+        margin-top: 52px;
+      }
+
+      .screenshots {
+        gap: 14px;
+
+        margin-right: -20px;
+
+        padding-right: 20px;
+      }
+
+      .screenshot {
+        width: 78vw;
+
+        max-width: 300px;
+
+        flex-basis: 78vw;
+      }
+
+      .about {
+        margin-top: 52px;
+      }
+
+      .about h2 {
+        font-size: 22px;
+      }
+
+      .links {
+        margin-top: 40px;
+      }
+
+      footer {
+        margin-top: 64px;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <div class="container">
+
+
+    <!-- Top bar -->
+
+    <div class="topbar">
+
+      <a
+        class="back"
+        href="/"
+      >
+        ← Busy Doin' Nothin'
+      </a>
+
+
+      <div class="language">
+
+        <button
+          class="language-button"
+          id="languageButton"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          English ▾
+        </button>
+
+
+        <div
+          class="language-menu"
+          id="languageMenu"
+        >
+
+          <button
+            class="language-option"
+            data-language="en"
+          >
+            English
+          </button>
+
+          <button
+            class="language-option"
+            data-language="zh-Hant"
+          >
+            繁體中文
+          </button>
+
+          <button
+            class="language-option"
+            data-language="zh-Hans"
+          >
+            简体中文
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+      <img
+        class="app-icon"
+        src="/assets/elegy/icon.png"
+        alt="Elegy app icon"
+      >
+
+
+      <div>
+
+        <h1>Elegy</h1>
+
+        <p
+          class="hero-description"
+
+          data-en="A writing and typesetting app for sharing words on social media."
+
+          data-zh-hant="一款為在社交平台分享文字而設的寫作與排版 App。"
+
+          data-zh-hans="一款为在社交平台分享文字而设计的写作与排版 App。"
+        >
+          A writing and typesetting app for sharing words on social media.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- Screenshots -->
+
+    <section class="screenshots-section">
+
+      <div
+        class="screenshots"
+        id="screenshots"
+      >
+
+        <img
+          class="screenshot"
+          data-screenshot="1"
+          src="/assets/elegy/en/screenshot-1.png"
+          alt="Elegy screenshot 1"
+          loading="lazy"
+        >
+
+        <img
+          class="screenshot"
+          data-screenshot="2"
+          src="/assets/elegy/en/screenshot-2.png"
+          alt="Elegy screenshot 2"
+          loading="lazy"
+        >
+
+        <img
+          class="screenshot"
+          data-screenshot="3"
+          src="/assets/elegy/en/screenshot-3.png"
+          alt="Elegy screenshot 3"
+          loading="lazy"
+        >
+
+        <img
+          class="screenshot"
+          data-screenshot="4"
+          src="/assets/elegy/en/screenshot-4.png"
+          alt="Elegy screenshot 4"
+          loading="lazy"
+        >
+
+        <img
+          class="screenshot"
+          data-screenshot="5"
+          src="/assets/elegy/en/screenshot-5.png"
+          alt="Elegy screenshot 5"
+          loading="lazy"
+        >
+
+      </div>
+
+    </section>
+
+
+
+    <!-- About -->
+
+    <section class="about">
+
+      <h2
+        data-en="About Elegy"
+        data-zh-hant="關於 Elegy"
+        data-zh-hans="关于 Elegy"
+      >
+        About Elegy
+      </h2>
+
+
+      <p
+        data-en="Elegy is a writing and typesetting app designed for sharing words on visual social platforms."
+
+        data-zh-hant="Elegy 是一款為文字分享而設的寫作與排版 App，讓你在以圖片為主的社交平台上，也能輕鬆分享長文、隨筆與詩歌。"
+
+        data-zh-hans="Elegy 是一款为文字分享而设计的写作与排版 App，让你在以图片为主的社交平台上，也能轻松分享长文、随笔与诗歌。"
+      >
+        Elegy is a writing and typesetting app designed for sharing words on visual social platforms.
+      </p>
+
+
+      <p
+        data-en="Write an article, a thought, or a poem. Elegy automatically turns your writing into clean, carefully typeset pages that are ready to save and share."
+
+        data-zh-hant="寫下文章、隨筆或詩歌，Elegy 會自動將文字排版、分頁，轉換成可以直接儲存及分享的頁面。"
+
+        data-zh-hans="写下文章、随笔或诗歌，Elegy 会自动将文字排版、分页，转换成可以直接保存及分享的页面。"
+      >
+        Write an article, a thought, or a poem. Elegy automatically turns your writing into clean, carefully typeset pages that are ready to save and share.
+      </p>
+
+
+      <p
+        data-en="Choose between Post and Story formats, preview your writing as you type, and let Elegy handle the layout and pagination."
+
+        data-zh-hant="你可以選擇貼文或限時動態格式，在寫作時即時預覽排版效果，其餘的排版與分頁交給 Elegy。"
+
+        data-zh-hans="你可以选择帖子或 Story 格式，在写作时实时预览排版效果，其余的排版与分页交给 Elegy。"
+      >
+        Choose between Post and Story formats, preview your writing as you type, and let Elegy handle the layout and pagination.
+      </p>
+
+
+      <p
+        data-en="For poetry, Poetry Mode preserves line breaks and spacing, keeping your writing the way you intended it."
+
+        data-zh-hant="對於詩歌，詩歌模式會保留換行與文字之間的空間，讓作品維持原本的節奏。"
+
+        data-zh-hans="对于诗歌，诗歌模式会保留换行与文字之间的空间，让作品维持原本的节奏。"
+      >
+        For poetry, Poetry Mode preserves line breaks and spacing, keeping your writing the way you intended it.
+      </p>
+
+
+      <p
+        data-en="No templates to build. No design tools to learn. Just write."
+
+        data-zh-hant="不需要建立模板，也不需要學習複雜的設計工具。專心寫就好。"
+
+        data-zh-hans="不需要建立模板，也不需要学习复杂的设计工具。专心写就好。"
+      >
+        No templates to build. No design tools to learn. Just write.
+      </p>
+
+    </section>
+
+
+
+    <!-- Support / Privacy -->
+
+    <div class="links">
+
+      <a
+        href="/elegy/support/"
+
+        data-en="Support"
+        data-zh-hant="支援"
+        data-zh-hans="支持"
+      >
+        Support
+      </a>
+
+
+      <span class="separator">
+        ·
+      </span>
+
+
+      <a
+        href="/elegy/privacy/"
+
+        data-en="Privacy Policy"
+        data-zh-hant="私隱政策"
+        data-zh-hans="隐私政策"
+      >
+        Privacy Policy
+      </a>
+
+    </div>
+
+
+
+    <!-- Footer -->
+
+    <footer>
+      © 2026 Busy Doin' Nothin'
+    </footer>
+
+
+  </div>
+
+
+
+  <script>
+
+    const languageButton =
+      document.getElementById("languageButton");
+
+    const languageMenu =
+      document.getElementById("languageMenu");
+
+    const languageOptions =
+      document.querySelectorAll(".language-option");
+
+    const screenshotsContainer =
+      document.getElementById("screenshots");
+
+
+
+    function setLanguage(language) {
+
+
+      /* --------------------
+         Change text
+      -------------------- */
+
+      document
+        .querySelectorAll("[data-en]")
+        .forEach(element => {
+
+          if (language === "zh-Hant") {
+
+            element.textContent =
+              element.dataset.zhHant;
+
+          }
+
+          else if (language === "zh-Hans") {
+
+            element.textContent =
+              element.dataset.zhHans;
+
+          }
+
+          else {
+
+            element.textContent =
+              element.dataset.en;
+
+          }
+
+        });
+
+
+
+      /* --------------------
+         Change screenshots
+      -------------------- */
+
+      let screenshotFolder = "en";
+
+
+      if (language === "zh-Hant") {
+
+        screenshotFolder =
+          "zh-Hant";
+
+      }
+
+      else if (language === "zh-Hans") {
+
+        screenshotFolder =
+          "zh-Hans";
+
+      }
+
+
+      document
+        .querySelectorAll("[data-screenshot]")
+        .forEach(image => {
+
+          const number =
+            image.dataset.screenshot;
+
+          image.src =
+            `/assets/elegy/${screenshotFolder}/screenshot-${number}.png`;
+
+        });
+
+
+
+      /* Reset gallery to first image
+         after switching language */
+
+      screenshotsContainer.scrollTo({
+        left: 0,
+        behavior: "smooth"
+      });
+
+
+
+      /* --------------------
+         HTML language
+      -------------------- */
+
+      document.documentElement.lang =
+        language;
+
+
+
+      /* --------------------
+         Language button
+      -------------------- */
+
+      if (language === "zh-Hant") {
+
+        languageButton.textContent =
+          "繁體中文 ▾";
+
+      }
+
+      else if (language === "zh-Hans") {
+
+        languageButton.textContent =
+          "简体中文 ▾";
+
+      }
+
+      else {
+
+        languageButton.textContent =
+          "English ▾";
+
+      }
+
+
+
+      /* --------------------
+         Remember choice
+      -------------------- */
+
+      localStorage.setItem(
+        "language",
+        language
+      );
+
+    }
+
+
+
+    /* Open language menu */
+
+    languageButton.addEventListener(
+      "click",
+      () => {
+
+        const isOpen =
+          languageMenu
+            .classList
+            .toggle("open");
+
+
+        languageButton.setAttribute(
+          "aria-expanded",
+          isOpen
+        );
+
+      }
+    );
+
+
+
+    /* Select language */
+
+    languageOptions.forEach(option => {
+
+      option.addEventListener(
+        "click",
+        () => {
+
+          setLanguage(
+            option.dataset.language
+          );
+
+
+          languageMenu
+            .classList
+            .remove("open");
+
+
+          languageButton.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+        }
+      );
+
+    });
+
+
+
+    /* Close menu if clicking elsewhere */
+
+    document.addEventListener(
+      "click",
+      event => {
+
+        if (
+          !event.target.closest(".language")
+        ) {
+
+          languageMenu
+            .classList
+            .remove("open");
+
+
+          languageButton.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+        }
+
+      }
+    );
+
+
+
+    /* --------------------
+       Load saved language
+    -------------------- */
+
+    const savedLanguage =
+      localStorage.getItem("language");
+
+
+    if (
+      savedLanguage === "zh-Hant" ||
+      savedLanguage === "zh-Hans"
+    ) {
+
+      setLanguage(
+        savedLanguage
+      );
+
+    }
+
+    else {
+
+      setLanguage("en");
+
+    }
+
+  </script>
+
+</body>
+</html>
