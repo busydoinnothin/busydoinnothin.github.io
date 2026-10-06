@@ -21,10 +21,87 @@
     }
 
     .container {
+      position: relative;
       max-width: 680px;
       margin: 0 auto;
       padding: 80px 24px 40px;
     }
+
+    /* Language selector */
+
+    .language {
+      position: absolute;
+      top: 32px;
+      right: 24px;
+    }
+
+    .language-button {
+      appearance: none;
+      border: 0;
+      background: none;
+      padding: 6px 0;
+      font: inherit;
+      font-size: 14px;
+      color: #777;
+      cursor: pointer;
+    }
+
+    .language-button:hover {
+      color: #222;
+    }
+
+    .language-menu {
+      position: absolute;
+      top: 36px;
+      right: 0;
+
+      min-width: 110px;
+      padding: 6px;
+
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-4px);
+
+      transition:
+        opacity 0.15s ease,
+        transform 0.15s ease,
+        visibility 0.15s;
+    }
+
+    .language-menu.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: block;
+      width: 100%;
+
+      border: 0;
+      background: none;
+
+      padding: 7px 10px;
+      border-radius: 6px;
+
+      text-align: left;
+      font: inherit;
+      font-size: 14px;
+
+      cursor: pointer;
+    }
+
+    .language-option:hover {
+      background: #f5f5f5;
+    }
+
+    /* Header */
 
     h1 {
       margin: 0 0 8px;
@@ -37,18 +114,10 @@
       font-size: 16px;
     }
 
+    /* Apps */
+
     main {
       margin-top: 48px;
-    }
-
-    .app-link {
-      display: block;
-      color: inherit;
-      text-decoration: none;
-      border-radius: 16px;
-      margin: -16px;
-      padding: 16px;
-      transition: background-color 0.15s ease;
     }
 
     .app {
@@ -57,10 +126,34 @@
       gap: 20px;
     }
 
-    .app-icon {
+    .app-icon-link {
+      display: block;
+      flex: 0 0 76px;
       width: 76px;
       height: 76px;
-      flex: 0 0 76px;
+
+      border-radius: 17px;
+
+      transition: transform 0.18s ease;
+    }
+
+    .app-icon-link:hover {
+      transform: scale(1.07);
+    }
+
+    .app-icon-link:active {
+      transform: scale(0.98);
+    }
+
+    .app-icon-link:focus-visible {
+      outline: 2px solid #222;
+      outline-offset: 4px;
+    }
+
+    .app-icon {
+      display: block;
+      width: 100%;
+      height: 100%;
       border-radius: 17px;
       object-fit: cover;
     }
@@ -81,16 +174,7 @@
       line-height: 1.5;
     }
 
-    @media (hover: hover) and (pointer: fine) {
-      .app-link:hover {
-        background: #f5f5f5;
-      }
-    }
-
-    .app-link:focus-visible {
-      outline: 2px solid #222;
-      outline-offset: 4px;
-    }
+    /* Footer */
 
     footer {
       margin-top: 80px;
@@ -98,11 +182,16 @@
       font-size: 14px;
     }
 
+    /* Mobile */
+
     @media (max-width: 600px) {
       .container {
-        padding-top: 48px;
-        padding-left: 20px;
-        padding-right: 20px;
+        padding: 64px 20px 40px;
+      }
+
+      .language {
+        top: 18px;
+        right: 20px;
       }
 
       h1 {
@@ -113,15 +202,19 @@
         margin-top: 40px;
       }
 
-      .app-icon {
+      .app {
+        gap: 16px;
+      }
+
+      .app-icon-link {
         width: 68px;
         height: 68px;
         flex-basis: 68px;
         border-radius: 15px;
       }
 
-      .app {
-        gap: 16px;
+      .app-icon {
+        border-radius: 15px;
       }
 
       .app-name {
@@ -139,18 +232,68 @@
 
   <div class="container">
 
+    <!-- Language -->
+
+    <div class="language">
+
+      <button
+        class="language-button"
+        id="languageButton"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        English ▾
+      </button>
+
+      <div class="language-menu" id="languageMenu">
+
+        <button
+          class="language-option"
+          data-language="en"
+        >
+          English
+        </button>
+
+        <button
+          class="language-option"
+          data-language="zh"
+        >
+          中文
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- Header -->
+
     <header>
+
       <h1>Busy Doin' Nothin'</h1>
-      <p class="tagline">
+
+      <p
+        class="tagline"
+        data-en="Couldn't find the apps I needed, so I made them."
+        data-zh="找不到自己需要的 App，所以乾脆自己做。"
+      >
         Couldn't find the apps I needed, so I made them.
       </p>
+
     </header>
+
+
+    <!-- Apps -->
 
     <main>
 
-      <a class="app-link" href="/elegy/" aria-label="Learn more about Elegy">
+      <div class="app">
 
-        <div class="app">
+        <a
+          class="app-icon-link"
+          href="/elegy/"
+          aria-label="Elegy"
+        >
 
           <img
             class="app-icon"
@@ -158,25 +301,127 @@
             alt="Elegy app icon"
           >
 
-          <div class="app-info">
-            <h2 class="app-name">Elegy</h2>
+        </a>
 
-            <p class="app-description">
-              A writing and typesetting app for sharing your words.
-            </p>
-          </div>
+        <div class="app-info">
+
+          <h2 class="app-name">
+            Elegy
+          </h2>
+
+          <p
+            class="app-description"
+            data-en="A writing and typesetting app for sharing your words."
+            data-zh="一款為分享文字而設的寫作與排版 App。"
+          >
+            A writing and typesetting app for sharing your words.
+          </p>
 
         </div>
 
-      </a>
+      </div>
 
     </main>
+
+
+    <!-- Footer -->
 
     <footer>
       © 2026 Busy Doin' Nothin'
     </footer>
 
   </div>
+
+
+  <script>
+
+    const languageButton =
+      document.getElementById("languageButton");
+
+    const languageMenu =
+      document.getElementById("languageMenu");
+
+    const languageOptions =
+      document.querySelectorAll(".language-option");
+
+
+    function setLanguage(language) {
+
+      document.querySelectorAll("[data-en]").forEach(element => {
+        element.textContent =
+          language === "zh"
+            ? element.dataset.zh
+            : element.dataset.en;
+      });
+
+      document.documentElement.lang =
+        language === "zh" ? "zh-Hant" : "en";
+
+      languageButton.textContent =
+        language === "zh"
+          ? "中文 ▾"
+          : "English ▾";
+
+      localStorage.setItem("language", language);
+
+    }
+
+
+    languageButton.addEventListener("click", () => {
+
+      const isOpen =
+        languageMenu.classList.toggle("open");
+
+      languageButton.setAttribute(
+        "aria-expanded",
+        isOpen
+      );
+
+    });
+
+
+    languageOptions.forEach(option => {
+
+      option.addEventListener("click", () => {
+
+        setLanguage(option.dataset.language);
+
+        languageMenu.classList.remove("open");
+
+        languageButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      });
+
+    });
+
+
+    document.addEventListener("click", event => {
+
+      if (!event.target.closest(".language")) {
+
+        languageMenu.classList.remove("open");
+
+        languageButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      }
+
+    });
+
+
+    const savedLanguage =
+      localStorage.getItem("language");
+
+    setLanguage(
+      savedLanguage === "zh" ? "zh" : "en"
+    );
+
+  </script>
 
 </body>
 </html>
