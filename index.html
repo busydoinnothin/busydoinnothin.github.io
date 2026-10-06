@@ -27,7 +27,7 @@
       padding: 80px 24px 40px;
     }
 
-    /* Language selector */
+    /* Language */
 
     .language {
       position: absolute;
@@ -54,24 +54,24 @@
       position: absolute;
       top: 36px;
       right: 0;
+      z-index: 10;
 
-      min-width: 110px;
+      min-width: 130px;
       padding: 6px;
 
       background: #fff;
       border: 1px solid #e5e5e5;
       border-radius: 10px;
-
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 6px 24px rgba(0,0,0,.08);
 
       opacity: 0;
       visibility: hidden;
       transform: translateY(-4px);
 
       transition:
-        opacity 0.15s ease,
-        transform 0.15s ease,
-        visibility 0.15s;
+        opacity .15s ease,
+        transform .15s ease,
+        visibility .15s;
     }
 
     .language-menu.open {
@@ -83,17 +83,13 @@
     .language-option {
       display: block;
       width: 100%;
-
       border: 0;
       background: none;
-
       padding: 7px 10px;
       border-radius: 6px;
-
       text-align: left;
       font: inherit;
       font-size: 14px;
-
       cursor: pointer;
     }
 
@@ -114,7 +110,7 @@
       font-size: 16px;
     }
 
-    /* Apps */
+    /* App */
 
     main {
       margin-top: 48px;
@@ -128,13 +124,11 @@
 
     .app-icon-link {
       display: block;
-      flex: 0 0 76px;
       width: 76px;
       height: 76px;
-
+      flex: 0 0 76px;
       border-radius: 17px;
-
-      transition: transform 0.18s ease;
+      transition: transform .18s ease;
     }
 
     .app-icon-link:hover {
@@ -142,7 +136,7 @@
     }
 
     .app-icon-link:active {
-      transform: scale(0.98);
+      transform: scale(.98);
     }
 
     .app-icon-link:focus-visible {
@@ -174,15 +168,11 @@
       line-height: 1.5;
     }
 
-    /* Footer */
-
     footer {
       margin-top: 80px;
       color: #777;
       font-size: 14px;
     }
-
-    /* Mobile */
 
     @media (max-width: 600px) {
       .container {
@@ -232,8 +222,6 @@
 
   <div class="container">
 
-    <!-- Language -->
-
     <div class="language">
 
       <button
@@ -247,26 +235,22 @@
 
       <div class="language-menu" id="languageMenu">
 
-        <button
-          class="language-option"
-          data-language="en"
-        >
+        <button class="language-option" data-language="en">
           English
         </button>
 
-        <button
-          class="language-option"
-          data-language="zh"
-        >
-          中文
+        <button class="language-option" data-language="zh-Hant">
+          繁體中文
+        </button>
+
+        <button class="language-option" data-language="zh-Hans">
+          简体中文
         </button>
 
       </div>
 
     </div>
 
-
-    <!-- Header -->
 
     <header>
 
@@ -275,15 +259,14 @@
       <p
         class="tagline"
         data-en="Couldn't find the apps I needed, so I made them."
-        data-zh="找不到自己需要的 App，所以乾脆自己做。"
+        data-zh-hant="找不到自己需要的 App，所以乾脆自己做。"
+        data-zh-hans="找不到自己需要的 App，所以干脆自己做。"
       >
         Couldn't find the apps I needed, so I made them.
       </p>
 
     </header>
 
-
-    <!-- Apps -->
 
     <main>
 
@@ -294,13 +277,11 @@
           href="/elegy/"
           aria-label="Elegy"
         >
-
           <img
             class="app-icon"
             src="/assets/elegy/icon.png"
             alt="Elegy app icon"
           >
-
         </a>
 
         <div class="app-info">
@@ -312,7 +293,8 @@
           <p
             class="app-description"
             data-en="A writing and typesetting app for sharing your words."
-            data-zh="一款為分享文字而設的寫作與排版 App。"
+            data-zh-hant="一款為分享文字而設的寫作與排版 App。"
+            data-zh-hans="一款为分享文字而设计的写作与排版 App。"
           >
             A writing and typesetting app for sharing your words.
           </p>
@@ -324,8 +306,6 @@
     </main>
 
 
-    <!-- Footer -->
-
     <footer>
       © 2026 Busy Doin' Nothin'
     </footer>
@@ -334,7 +314,6 @@
 
 
   <script>
-
     const languageButton =
       document.getElementById("languageButton");
 
@@ -348,22 +327,39 @@
     function setLanguage(language) {
 
       document.querySelectorAll("[data-en]").forEach(element => {
-        element.textContent =
-          language === "zh"
-            ? element.dataset.zh
-            : element.dataset.en;
+
+        if (language === "zh-Hant") {
+          element.textContent = element.dataset.zhHant;
+        }
+
+        else if (language === "zh-Hans") {
+          element.textContent = element.dataset.zhHans;
+        }
+
+        else {
+          element.textContent = element.dataset.en;
+        }
+
       });
 
-      document.documentElement.lang =
-        language === "zh" ? "zh-Hant" : "en";
 
-      languageButton.textContent =
-        language === "zh"
-          ? "中文 ▾"
-          : "English ▾";
+      document.documentElement.lang = language;
+
+
+      if (language === "zh-Hant") {
+        languageButton.textContent = "繁體中文 ▾";
+      }
+
+      else if (language === "zh-Hans") {
+        languageButton.textContent = "简体中文 ▾";
+      }
+
+      else {
+        languageButton.textContent = "English ▾";
+      }
+
 
       localStorage.setItem("language", language);
-
     }
 
 
@@ -417,10 +413,17 @@
     const savedLanguage =
       localStorage.getItem("language");
 
-    setLanguage(
-      savedLanguage === "zh" ? "zh" : "en"
-    );
 
+    if (
+      savedLanguage === "zh-Hant" ||
+      savedLanguage === "zh-Hans"
+    ) {
+      setLanguage(savedLanguage);
+    }
+
+    else {
+      setLanguage("en");
+    }
   </script>
 
 </body>
