@@ -1,64 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elegy Support — Busy Doin Nothin</title>
+
+  <title>Elegy Support — Busy Doin' Nothin'</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      max-width: 680px;
-      margin: 80px auto;
-      padding: 0 24px;
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #222;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+                   Helvetica, Arial, sans-serif;
       line-height: 1.6;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 48px 24px 40px;
+    }
+
+    /* Top bar */
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 56px;
+    }
+
+    .back {
+      color: #777;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color .15s ease;
+    }
+
+    .back:hover {
       color: #222;
     }
 
+    /* Language */
+
+    .language {
+      position: relative;
+    }
+
+    .language-button {
+      appearance: none;
+      border: 0;
+      background: none;
+      padding: 6px 0;
+      font: inherit;
+      font-size: 14px;
+      color: #777;
+      cursor: pointer;
+    }
+
+    .language-button:hover {
+      color: #222;
+    }
+
+    .language-menu {
+      position: absolute;
+      top: 36px;
+      right: 0;
+      z-index: 20;
+
+      min-width: 130px;
+      padding: 6px;
+
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .08);
+
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-4px);
+
+      transition:
+        opacity .15s ease,
+        transform .15s ease,
+        visibility .15s;
+    }
+
+    .language-menu.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: block;
+      width: 100%;
+      border: 0;
+      background: none;
+      padding: 7px 10px;
+      border-radius: 6px;
+      text-align: left;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .language-option:hover {
+      background: #f5f5f5;
+    }
+
+    /* Content */
+
     h1 {
+      margin: 0 0 16px;
       font-size: 32px;
-      margin-bottom: 8px;
+      line-height: 1.2;
     }
 
     h2 {
-      margin-top: 48px;
+      margin: 40px 0 10px;
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    p {
+      margin: 0 0 16px;
+      font-size: 16px;
     }
 
     a {
       color: inherit;
     }
 
+    .email {
+      text-underline-offset: 3px;
+      text-decoration-color: #bbb;
+    }
+
+    .email:hover {
+      text-decoration-color: #222;
+    }
+
     footer {
       margin-top: 80px;
-      font-size: 14px;
       color: #777;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 28px 20px 36px;
+      }
+
+      .topbar {
+        margin-bottom: 44px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        margin-top: 36px;
+      }
+
+      footer {
+        margin-top: 64px;
+      }
     }
   </style>
 </head>
 
+
 <body>
 
-  <h1>Elegy Support</h1>
+  <div class="container">
 
-  <p>
-    Need help with Elegy? If you have a question, encounter a bug,
-    or would like to share feedback, feel free to get in touch.
-  </p>
+    <div class="topbar">
 
-  <h2>Contact</h2>
+      <a class="back" href="/elegy/">
+        ← Elegy
+      </a>
 
-  <p>
-    Email:
-    <a href="mailto:YOUR_EMAIL">YOUR_EMAIL</a>
-  </p>
+      <div class="language">
 
-  <p>
-    <a href="/">← Busy Doin Nothin</a>
-  </p>
+        <button
+          class="language-button"
+          id="languageButton"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          English ▾
+        </button>
 
-  <footer>
-    © 2026 Busy Doin Nothin
-  </footer>
+        <div class="language-menu" id="languageMenu">
+
+          <button class="language-option" data-language="en">
+            English
+          </button>
+
+          <button class="language-option" data-language="zh-Hant">
+            繁體中文
+          </button>
+
+          <button class="language-option" data-language="zh-Hans">
+            简体中文
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <main>
+
+      <h1
+        data-en="Elegy Support"
+        data-zh-hant="Elegy 支援"
+        data-zh-hans="Elegy 支持"
+      >
+        Elegy Support
+      </h1>
+
+
+      <p
+        data-en="Need help with Elegy? If you have a question, encounter a bug, or would like to share feedback, feel free to get in touch."
+        data-zh-hant="使用 Elegy 時遇到問題？如果你有任何疑問、發現錯誤，或想提供意見，歡迎與我們聯絡。"
+        data-zh-hans="使用 Elegy 时遇到问题？如果你有任何疑问、发现错误，或想提供意见，欢迎与我们联系。"
+      >
+        Need help with Elegy? If you have a question, encounter a bug, or would like to share feedback, feel free to get in touch.
+      </p>
+
+
+      <h2
+        data-en="Contact"
+        data-zh-hant="聯絡"
+        data-zh-hans="联系"
+      >
+        Contact
+      </h2>
+
+
+      <p>
+        <span
+          data-en="Email:"
+          data-zh-hant="電郵："
+          data-zh-hans="邮箱："
+        >
+          Email:
+        </span>
+
+        <a
+          class="email"
+          href="mailto:busydoinnothin.dev@gmail.com"
+        >
+          busydoinnothin.dev@gmail.com
+        </a>
+      </p>
+
+    </main>
+
+
+    <footer>
+      © 2026 Busy Doin' Nothin'
+    </footer>
+
+  </div>
+
+
+  <script>
+
+    const languageButton =
+      document.getElementById("languageButton");
+
+    const languageMenu =
+      document.getElementById("languageMenu");
+
+    const languageOptions =
+      document.querySelectorAll(".language-option");
+
+
+    function setLanguage(language) {
+
+      document.querySelectorAll("[data-en]").forEach(element => {
+
+        if (language === "zh-Hant") {
+          element.textContent = element.dataset.zhHant;
+        }
+
+        else if (language === "zh-Hans") {
+          element.textContent = element.dataset.zhHans;
+        }
+
+        else {
+          element.textContent = element.dataset.en;
+        }
+
+      });
+
+
+      document.documentElement.lang = language;
+
+
+      if (language === "zh-Hant") {
+        languageButton.textContent = "繁體中文 ▾";
+      }
+
+      else if (language === "zh-Hans") {
+        languageButton.textContent = "简体中文 ▾";
+      }
+
+      else {
+        languageButton.textContent = "English ▾";
+      }
+
+
+      localStorage.setItem("language", language);
+    }
+
+
+    languageButton.addEventListener("click", () => {
+
+      const isOpen =
+        languageMenu.classList.toggle("open");
+
+      languageButton.setAttribute(
+        "aria-expanded",
+        isOpen
+      );
+
+    });
+
+
+    languageOptions.forEach(option => {
+
+      option.addEventListener("click", () => {
+
+        setLanguage(option.dataset.language);
+
+        languageMenu.classList.remove("open");
+
+        languageButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      });
+
+    });
+
+
+    document.addEventListener("click", event => {
+
+      if (!event.target.closest(".language")) {
+
+        languageMenu.classList.remove("open");
+
+        languageButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      }
+
+    });
+
+
+    const savedLanguage =
+      localStorage.getItem("language");
+
+
+    if (
+      savedLanguage === "zh-Hant" ||
+      savedLanguage === "zh-Hans"
+    ) {
+      setLanguage(savedLanguage);
+    }
+
+    else {
+      setLanguage("en");
+    }
+
+  </script>
 
 </body>
 </html>
