@@ -1,107 +1,513 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elegy Privacy Policy — Busy Doin Nothin</title>
+
+  <title>Elegy Privacy Policy — Busy Doin' Nothin'</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      max-width: 680px;
-      margin: 80px auto;
-      padding: 0 24px;
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #222;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+                   Helvetica, Arial, sans-serif;
       line-height: 1.6;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 48px 24px 40px;
+    }
+
+    /* Top bar */
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 56px;
+    }
+
+    .back {
+      color: #777;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color .15s ease;
+    }
+
+    .back:hover {
       color: #222;
     }
 
-    h1 {
-      font-size: 32px;
-      margin-bottom: 8px;
+    /* Language */
+
+    .language {
+      position: relative;
     }
 
-    h2 {
-      margin-top: 40px;
+    .language-button {
+      appearance: none;
+      border: 0;
+      background: none;
+      padding: 6px 0;
+      font: inherit;
+      font-size: 14px;
+      color: #777;
+      cursor: pointer;
+    }
+
+    .language-button:hover {
+      color: #222;
+    }
+
+    .language-menu {
+      position: absolute;
+      top: 36px;
+      right: 0;
+      z-index: 20;
+
+      min-width: 130px;
+      padding: 6px;
+
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .08);
+
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-4px);
+
+      transition:
+        opacity .15s ease,
+        transform .15s ease,
+        visibility .15s;
+    }
+
+    .language-menu.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: block;
+      width: 100%;
+      border: 0;
+      background: none;
+      padding: 7px 10px;
+      border-radius: 6px;
+      text-align: left;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .language-option:hover {
+      background: #f5f5f5;
+    }
+
+    /* Content */
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 32px;
+      line-height: 1.2;
     }
 
     .updated {
+      margin: 0 0 32px;
       color: #777;
+      font-size: 14px;
+    }
+
+    h2 {
+      margin: 40px 0 10px;
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    p {
+      margin: 0 0 16px;
+      font-size: 16px;
     }
 
     a {
       color: inherit;
     }
 
+    .email {
+      text-underline-offset: 3px;
+      text-decoration-color: #bbb;
+    }
+
+    .email:hover {
+      text-decoration-color: #222;
+    }
+
     footer {
       margin-top: 80px;
-      font-size: 14px;
       color: #777;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 28px 20px 36px;
+      }
+
+      .topbar {
+        margin-bottom: 44px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        margin-top: 36px;
+      }
+
+      footer {
+        margin-top: 64px;
+      }
     }
   </style>
 </head>
 
+
 <body>
 
-  <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: October 2026</p>
+  <div class="container">
 
-  <p>
-    Elegy is developed by Busy Doin Nothin. Your privacy is important to us.
-    This Privacy Policy explains how information is handled when you use Elegy.
-  </p>
+    <div class="topbar">
 
-  <h2>Information Collection</h2>
+      <a class="back" href="/elegy/">
+        ← Elegy
+      </a>
 
-  <p>
-    Elegy does not require an account and does not collect personal information
-    from users.
-  </p>
+      <div class="language">
 
-  <h2>Your Content</h2>
+        <button
+          class="language-button"
+          id="languageButton"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          English ▾
+        </button>
 
-  <p>
-    Text and other content you create in Elegy are stored on your device.
-    Busy Doin Nothin does not have access to the content you create in the app.
-  </p>
+        <div class="language-menu" id="languageMenu">
 
-  <h2>Analytics and Tracking</h2>
+          <button class="language-option" data-language="en">
+            English
+          </button>
 
-  <p>
-    Elegy does not use third-party advertising, analytics, or tracking
-    technologies.
-  </p>
+          <button class="language-option" data-language="zh-Hant">
+            繁體中文
+          </button>
 
-  <h2>Sharing</h2>
+          <button class="language-option" data-language="zh-Hans">
+            简体中文
+          </button>
 
-  <p>
-    Elegy allows you to save and share images created from your writing.
-    Content is only shared when you choose to save or share it using features
-    provided by your device.
-  </p>
+        </div>
 
-  <h2>Changes to This Policy</h2>
+      </div>
 
-  <p>
-    This Privacy Policy may be updated if Elegy's features or data practices
-    change. Any updates will be posted on this page.
-  </p>
+    </div>
 
-  <h2>Contact</h2>
 
-  <p>
-    If you have any questions about this Privacy Policy, please contact:
-    <a href="mailto:YOUR_EMAIL">YOUR_EMAIL</a>
-  </p>
+    <main>
 
-  <p>
-    <a href="/elegy/support/">Elegy Support</a>
-    ·
-    <a href="/">Busy Doin Nothin</a>
-  </p>
+      <h1
+        data-en="Privacy Policy"
+        data-zh-hant="私隱政策"
+        data-zh-hans="隐私政策"
+      >
+        Privacy Policy
+      </h1>
 
-  <footer>
-    © 2026 Busy Doin Nothin
-  </footer>
+
+      <p
+        class="updated"
+        data-en="Last updated: October 2026"
+        data-zh-hant="最後更新：2026 年 10 月"
+        data-zh-hans="最后更新：2026 年 10 月"
+      >
+        Last updated: October 2026
+      </p>
+
+
+      <p
+        data-en="Elegy is developed by Busy Doin' Nothin'. Your privacy is important to us. This Privacy Policy explains how information is handled when you use Elegy."
+        data-zh-hant="Elegy 由 Busy Doin' Nothin' 開發。我們重視你的私隱。本私隱政策說明你使用 Elegy 時，相關資料如何被處理。"
+        data-zh-hans="Elegy 由 Busy Doin' Nothin' 开发。我们重视你的隐私。本隐私政策说明你使用 Elegy 时，相关信息如何被处理。"
+      >
+        Elegy is developed by Busy Doin' Nothin'. Your privacy is important to us. This Privacy Policy explains how information is handled when you use Elegy.
+      </p>
+
+
+      <h2
+        data-en="Information Collection"
+        data-zh-hant="資料收集"
+        data-zh-hans="信息收集"
+      >
+        Information Collection
+      </h2>
+
+      <p
+        data-en="Elegy does not require an account and does not collect personal information from users."
+        data-zh-hant="Elegy 不需要建立帳戶，亦不會收集使用者的個人資料。"
+        data-zh-hans="Elegy 不需要创建账户，也不会收集用户的个人信息。"
+      >
+        Elegy does not require an account and does not collect personal information from users.
+      </p>
+
+
+      <h2
+        data-en="Your Content"
+        data-zh-hant="你的內容"
+        data-zh-hans="你的内容"
+      >
+        Your Content
+      </h2>
+
+      <p
+        data-en="Text and other content you create in Elegy are stored locally on your device. Busy Doin' Nothin' does not have access to the content you create in the app."
+        data-zh-hant="你在 Elegy 建立的文字及其他內容均儲存在你的裝置上。Busy Doin' Nothin' 無法存取你在 App 內建立的內容。"
+        data-zh-hans="你在 Elegy 创建的文字及其他内容均存储在你的设备上。Busy Doin' Nothin' 无法访问你在 App 内创建的内容。"
+      >
+        Text and other content you create in Elegy are stored locally on your device. Busy Doin' Nothin' does not have access to the content you create in the app.
+      </p>
+
+
+      <h2
+        data-en="Cloud Storage"
+        data-zh-hant="雲端儲存"
+        data-zh-hans="云端存储"
+      >
+        Cloud Storage
+      </h2>
+
+      <p
+        data-en="Elegy does not currently use iCloud or another cloud service to sync your writing."
+        data-zh-hant="Elegy 目前不會使用 iCloud 或其他雲端服務同步你的文字。"
+        data-zh-hans="Elegy 目前不会使用 iCloud 或其他云端服务同步你的文字。"
+      >
+        Elegy does not currently use iCloud or another cloud service to sync your writing.
+      </p>
+
+
+      <h2
+        data-en="Analytics and Tracking"
+        data-zh-hant="分析與追蹤"
+        data-zh-hans="分析与追踪"
+      >
+        Analytics and Tracking
+      </h2>
+
+      <p
+        data-en="Elegy does not use third-party advertising, analytics, or tracking technologies."
+        data-zh-hant="Elegy 不使用第三方廣告、分析或追蹤技術。"
+        data-zh-hans="Elegy 不使用第三方广告、分析或追踪技术。"
+      >
+        Elegy does not use third-party advertising, analytics, or tracking technologies.
+      </p>
+
+
+      <h2
+        data-en="Saving and Sharing"
+        data-zh-hant="儲存與分享"
+        data-zh-hans="保存与分享"
+      >
+        Saving and Sharing
+      </h2>
+
+      <p
+        data-en="Elegy allows you to save images created from your writing. Content leaves the app only when you choose to save or share it using features provided by your device."
+        data-zh-hant="Elegy 讓你將文字製作成的圖片儲存到裝置。只有當你主動使用裝置提供的儲存或分享功能時，相關內容才會離開 Elegy。"
+        data-zh-hans="Elegy 允许你将文字制作成的图片保存到设备。只有当你主动使用设备提供的保存或分享功能时，相关内容才会离开 Elegy。"
+      >
+        Elegy allows you to save images created from your writing. Content leaves the app only when you choose to save or share it using features provided by your device.
+      </p>
+
+
+      <h2
+        data-en="Changes to This Policy"
+        data-zh-hant="政策更新"
+        data-zh-hans="政策更新"
+      >
+        Changes to This Policy
+      </h2>
+
+      <p
+        data-en="This Privacy Policy may be updated if Elegy's features or data practices change. Any updates will be posted on this page."
+        data-zh-hant="如果 Elegy 的功能或資料處理方式有所改變，本私隱政策亦可能隨之更新。任何更新都會刊登於本頁。"
+        data-zh-hans="如果 Elegy 的功能或数据处理方式发生变化，本隐私政策也可能随之更新。任何更新都会发布在本页面。"
+      >
+        This Privacy Policy may be updated if Elegy's features or data practices change. Any updates will be posted on this page.
+      </p>
+
+
+      <h2
+        data-en="Contact"
+        data-zh-hant="聯絡"
+        data-zh-hans="联系"
+      >
+        Contact
+      </h2>
+
+      <p>
+        <span
+          data-en="If you have any questions about this Privacy Policy, please contact:"
+          data-zh-hant="如對本私隱政策有任何疑問，請聯絡："
+          data-zh-hans="如对本隐私政策有任何疑问，请联系："
+        >
+          If you have any questions about this Privacy Policy, please contact:
+        </span>
+
+        <a
+          class="email"
+          href="mailto:busydoinnothin.dev@gmail.com"
+        >
+          busydoinnothin.dev@gmail.com
+        </a>
+      </p>
+
+    </main>
+
+
+    <footer>
+      © 2026 Busy Doin' Nothin'
+    </footer>
+
+  </div>
+
+
+  <script>
+
+    const languageButton =
+      document.getElementById("languageButton");
+
+    const languageMenu =
+      document.getElementById("languageMenu");
+
+    const languageOptions =
+      document.querySelectorAll(".language-option");
+
+
+    function setLanguage(language) {
+
+      document.querySelectorAll("[data-en]").forEach(element => {
+
+        if (language === "zh-Hant") {
+          element.textContent = element.dataset.zhHant;
+        }
+
+        else if (language === "zh-Hans") {
+          element.textContent = element.dataset.zhHans;
+        }
+
+        else {
+          element.textContent = element.dataset.en;
+        }
+
+      });
+
+
+      document.documentElement.lang = language;
+
+
+      if (language === "zh-Hant") {
+        languageButton.textContent = "繁體中文 ▾";
+      }
+
+      else if (language === "zh-Hans") {
+        languageButton.textContent = "简体中文 ▾";
+      }
+
+      else {
+        languageButton.textContent = "English ▾";
+      }
+
+
+      localStorage.setItem("language", language);
+    }
+
+
+    languageButton.addEventListener("click", () => {
+
+      const isOpen =
+        languageMenu.classList.toggle("open");
+
+      languageButton.setAttribute(
+        "aria-expanded",
+        isOpen
+      );
+
+    });
+
+
+    languageOptions.forEach(option => {
+
+      option.addEventListener("click", () => {
+
+        setLanguage(option.dataset.language);
+
+        languageMenu.classList.remove("open");
+
+        languageButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      });
+
+    });
+
+
+    document.addEventListener("click", event => {
+
+      if (!event.target.closest(".language")) {
+
+        languageMenu.classList.remove("open");
+
+        languageButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      }
+
+    });
+
+
+    const savedLanguage =
+      localStorage.getItem("language");
+
+
+    if (
+      savedLanguage === "zh-Hant" ||
+      savedLanguage === "zh-Hans"
+    ) {
+      setLanguage(savedLanguage);
+    }
+
+    else {
+      setLanguage("en");
+    }
+
+  </script>
 
 </body>
 </html>
